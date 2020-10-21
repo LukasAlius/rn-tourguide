@@ -21,9 +21,25 @@ const uri =
 // Add <TourGuideProvider/> at the root of you app!
 function App() {
   return (
-    <TourGuideProvider {...{ borderRadius: 16 }}>
+    <TourGuideProvider {...{ borderRadius: 16 }} tooltipComponent={CustomTooltip}>
       <AppContent />
     </TourGuideProvider>
+  )
+}
+
+const CustomTooltip = ({currentStep, handleStop}) => {
+  return (
+    <View style={{
+      backgroundColor: '#ffffff',
+      padding: 30,
+      borderRadius: 8
+    }}>
+      <Text>Hello</Text>
+      <Text>{currentStep.text}</Text>
+      {currentStep.title && <Text>{currentStep.title}</Text>}
+      {currentStep.image && <currentStep.image />}
+      {handleStop && <TouchableOpacity onPress={() => handleStop(true)}><Text>Dismiss!</Text></TouchableOpacity>}
+    </View>
   )
 }
 
@@ -42,7 +58,7 @@ const AppContent = () => {
 
   React.useEffect(() => {
     eventEmitter.on('start', () => console.log('start'))
-    eventEmitter.on('stop', () => console.log('stop'))
+    eventEmitter.on('stop', (event) => console.log({event}))
     eventEmitter.on('stepChange', () => console.log(`stepChange`))
     return () => eventEmitter.off('*', null)
   }, [])
@@ -53,6 +69,8 @@ const AppContent = () => {
         keepTooltipPosition
         zone={2}
         text={'A react-native-copilot remastered! 🎉'}
+        title={'Hello im title'}
+        image={() => <Text>Some image</Text>}
         borderRadius={16}
       >
         <Text style={styles.title}>
