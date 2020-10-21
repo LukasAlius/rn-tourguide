@@ -33,7 +33,7 @@ export interface ModalProps {
   backdropColor: string
   labels: Labels
   easing(value: number): number
-  stop(): void
+  stop(isDismissed?: boolean): void
   next(): void
   prev(): void
 }
@@ -252,9 +252,9 @@ export class Modal extends React.Component<ModalProps, State> {
     this.props.prev()
   }
 
-  handleStop = () => {
+  handleStop = (isDismissed?: boolean) => {
     this.reset()
-    this.props.stop()
+    this.props.stop(isDismissed)
   }
 
   renderMask = () => (

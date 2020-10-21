@@ -8,6 +8,8 @@ export interface TourGuideZoneProps {
   zone: number
   isTourGuide?: boolean
   text?: string
+  title?: string
+  image?: React.ReactNode
   shape?: Shape
   maskOffset?: number
   borderRadius?: number
@@ -24,6 +26,8 @@ export const TourGuideZone = ({
   children,
   shape,
   text,
+  title,
+  image,
   maskOffset,
   borderRadius,
   style,
@@ -47,6 +51,8 @@ export const TourGuideZone = ({
         keepTooltipPosition,
         tooltipBottomOffset,
         borderRadiusObject,
+        title,
+        image
       }}
     >
       <Wrapper {...{ style }}>{children}</Wrapper>

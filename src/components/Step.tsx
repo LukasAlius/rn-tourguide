@@ -7,6 +7,8 @@ interface Props {
   name: string
   order: number
   text: string
+  title?: string
+  image?: React.ReactNode
   shape?: Shape
   active?: boolean
   maskOffset?: number
