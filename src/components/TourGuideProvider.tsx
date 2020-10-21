@@ -47,7 +47,7 @@ export const TourGuideProvider = ({
   startAtMount = false,
 }: TourGuideProviderProps) => {
   const [visible, setVisible] = useState<boolean | undefined>(undefined)
-  const [isDismissed, setIsDismissed] = useState<boolean | undefined>(undefined)
+  const [isDismissed, setIsDismissed] = useState<boolean>(false)
   const [currentStep, updateCurrentStep] = useState<IStep | undefined>()
   const [steps, setSteps] = useState<Steps>({})
   const [canStart, setCanStart] = useState<boolean>(false)
@@ -124,10 +124,10 @@ export const TourGuideProvider = ({
 
   const prev = () => setCurrentStep(getPrevStep()!)
 
-  const stop = (isDismissed?: boolean) => {
+  const stop = (dismiss?: boolean) => {
     setVisible(false)
     setCurrentStep(undefined)
-    setIsDismissed(isDismissed)
+    setIsDismissed(dismiss ?? false)
   }
 
   const registerStep = (step: IStep) => {
